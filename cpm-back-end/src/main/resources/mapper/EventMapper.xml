@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.martin.cpmbackend.mapper.EventMapper">
+
+    <select id="getEventsList" resultType="com.martin.cpmbackend.mode.Event">
+        select * from event
+    </select>
+
+    <select id="getEventById" resultType="com.martin.cpmbackend.mode.Event" parameterType="int">
+        select * from event where id = #{id}
+    </select>
+
+    <select id="getEventsByEventType" resultType="com.martin.cpmbackend.mode.Event" parameterType="int">
+        select * from event where eventType = #{eventType}
+    </select>
+
+    <select id="getEventByOperator" resultType="com.martin.cpmbackend.mode.Event" parameterType="string">
+        select * from event where operator = #{operator}
+    </select>
+
+    <select id="getEventByTarget" resultType="com.martin.cpmbackend.mode.Event" parameterType="string">
+        select * from event where target = #{target}
+    </select>
+
+    <insert id="addEvent" parameterType="com.martin.cpmbackend.mode.Event">
+        insert into event(id, eventType, time, operator, target, event, reason) value (#{id},#{eventType} ,#{time},#{operator},#{target},#{event},#{reason})
+    </insert>
+
+</mapper>
