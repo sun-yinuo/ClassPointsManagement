@@ -1,0 +1,25 @@
+server:
+  port: 9000
+spring:
+  application:
+      name: cpm-back-end
+  #数据源
+  datasource:
+      hikari:
+          connection-test-query: SELECT 1
+          idle-timeout: -1
+      dynamic:
+          primary: mysql-development
+          strict: true #不严格匹配数据源
+          datasource:
+            #开发数据源
+            mysql-development:
+              url: jdbc:mysql://127.0.0.1:3306/cpm-dev
+              username: root
+              password: MysqlSunyinuo15332#
+              driver-class-name: com.mysql.cj.jdbc.Driver
+
+# log4j2
+logging:
+    level:
+      cn.jay.repository: trace
