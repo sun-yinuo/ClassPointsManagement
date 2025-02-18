@@ -35,6 +35,8 @@ public class PointEvent {
     private String event;
     /**原因**/
     private String reason;
+    /**学科**/
+    private String subject;
     /**通过？**/
     private int pass;
 }

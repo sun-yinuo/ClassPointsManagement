@@ -52,6 +52,7 @@ class EventServiceImplTest {
         event.setOperator("曹燕琳");
         event.setTarget("李思锐");
         event.setEvent("point +1");
+        event.setSubject("语文");
         event.setReason("666");
 
 
@@ -64,6 +65,7 @@ class EventServiceImplTest {
         event2.setOperator("班主任");
         event2.setTarget("孙一诺");
         event2.setEvent("point +1");
+        event2.setSubject("数学");
         event2.setReason("666");
         eventService.addEvent(event2);
     }

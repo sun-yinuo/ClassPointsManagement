@@ -43,6 +43,13 @@ public interface EventService {
     List<Event> getEventByTarget(String target);
 
     /**
+     * 根据学科获取事件
+     * @param subject 学科
+     * @return list
+     */
+    List<Event> getEventByEventSubject(String subject);
+
+    /**
      * 添加事件
      * @param event 事件
      * @return 影响

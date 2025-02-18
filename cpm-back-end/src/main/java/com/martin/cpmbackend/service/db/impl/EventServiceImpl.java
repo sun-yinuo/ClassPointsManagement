@@ -72,6 +72,16 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
+     * 根据学科获取事件
+     * @param subject 学科
+     * @return list
+     */
+    @Override
+    public List<Event> getEventByEventSubject(String subject){
+        return eventMapper.getEventByEventSubject(subject);
+    }
+
+    /**
      * 添加事件
      *
      * @param event 事件

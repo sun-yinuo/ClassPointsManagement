@@ -42,7 +42,8 @@ public class PointsServiceImpl implements PointsService {
      */
     @Override
     public Result AddPoints(String token, JSONObject jsonParam) {
-
+        //获取学科
+        String subject = jsonParam.getString("subject");
         //获取目标
         String target = jsonParam.getString("target");
         //获取值
@@ -77,6 +78,7 @@ public class PointsServiceImpl implements PointsService {
                 event.setOperator("班主任");
                 event.setTarget(target);
                 event.setEvent("由班主任加" + value + "分" + "=>" + target);
+                event.setSubject(subject);
                 event.setReason(reason);
 
                 //添加事件
@@ -100,6 +102,7 @@ public class PointsServiceImpl implements PointsService {
             event.setOperator(user.getUserName());
             event.setTarget(target);
             event.setEvent("由管理员" + user.getUserName() + "加" + value + "分" + "=>" + target +",等待审核");
+            event.setSubject(subject);
             event.setReason(reason);
 
             //添加事件
@@ -113,6 +116,7 @@ public class PointsServiceImpl implements PointsService {
             pointEvent.setOperator(event.getOperator());
             pointEvent.setTarget(event.getTarget());
             pointEvent.setEvent(event.getEvent());
+            pointEvent.setSubject(event.getSubject());
             pointEvent.setReason(event.getReason());
             //-1表未审核
             pointEvent.setPass(-1);
@@ -136,6 +140,8 @@ public class PointsServiceImpl implements PointsService {
      */
     @Override
     public Result SubtractPoints(String token, JSONObject jsonParam) {
+        //获取学科
+        String subject = jsonParam.getString("subject");
         //获取目标
         String target = jsonParam.getString("target");
         //获取值
@@ -170,6 +176,7 @@ public class PointsServiceImpl implements PointsService {
                 event.setOperator("班主任");
                 event.setTarget(target);
                 event.setEvent("由班主任减" + value + "分" + "=>" + target);
+                event.setSubject(subject);
                 event.setReason(reason);
 
                 //添加事件
@@ -193,6 +200,7 @@ public class PointsServiceImpl implements PointsService {
             event.setOperator(user.getUserName());
             event.setTarget(target);
             event.setEvent("由管理员" + user.getUserName() + "减" + value + "分" + "=>" + target +",等待审核");
+            event.setSubject(subject);
             event.setReason(reason);
 
             //添加事件
@@ -206,6 +214,7 @@ public class PointsServiceImpl implements PointsService {
             pointEvent.setOperator(event.getOperator());
             pointEvent.setTarget(event.getTarget());
             pointEvent.setEvent(event.getEvent());
+            pointEvent.setSubject(event.getSubject());
             pointEvent.setReason(event.getReason());
             //-1表未审核
             pointEvent.setPass(-1);

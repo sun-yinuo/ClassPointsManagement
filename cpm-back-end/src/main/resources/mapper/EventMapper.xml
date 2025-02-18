@@ -23,8 +23,12 @@
         select * from event where target = #{target}
     </select>
 
+    <select id="getEventByEventSubject" resultType="com.martin.cpmbackend.mode.Event" parameterType="string">
+        select * from event where subject = #{subject}
+    </select>
+
     <insert id="addEvent" parameterType="com.martin.cpmbackend.mode.Event" useGeneratedKeys="true" keyProperty="id">
-        insert into event(id, eventType, time, operator, target, event, reason) value (#{id},#{eventType} ,#{time},#{operator},#{target},#{event},#{reason})
+        insert into event(id, eventType, time, operator, target, event,subject, reason) value (#{id},#{eventType} ,#{time},#{operator},#{target},#{event},#{subject},#{reason})
     </insert>
 
 </mapper>

@@ -7,6 +7,7 @@ create table event
     operator text not null ,
     target text not null ,
     event text not null,
+    subject text not null,
     reason text not null
 )
     collate = utf8mb3_bin;

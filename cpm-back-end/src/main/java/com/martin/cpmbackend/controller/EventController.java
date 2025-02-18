@@ -46,6 +46,11 @@ public class EventController {
         return eventService.getEventByOperator(operator);
     }
 
+    @GetMapping("/getEventBySubject")
+    public List<Event> getEventBySubject(String subject){
+        return eventService.getEventByEventSubject(subject);
+    }
+
     @GetMapping("/getEventByTarget")
     public List<Event> getEventByTarget(String target){
         return eventService.getEventByTarget(target);

@@ -32,6 +32,8 @@ public class Event {
     private String target;
     /**事件描述**/
     private String event;
+    /**学科**/
+    private String subject;
     /**原因**/
     private String reason;
 }
