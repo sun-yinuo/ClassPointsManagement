@@ -3,6 +3,7 @@ package com.martin.cpmbackend.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.martin.cpmbackend.service.api.user.impl.LoginServiceImpl;
 import com.martin.cpmbackend.service.api.user.impl.RegistrationServiceImpl;
+import com.martin.cpmbackend.service.db.impl.RedisToolsImpl;
 import com.martin.cpmbackend.service.db.impl.UserServiceImpl;
 import com.martin.cpmbackend.utils.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user/")
 public class UserController {
+
+    public final RedisToolsImpl redisTools;
     public final RegistrationServiceImpl registrationService;
     public final LoginServiceImpl loginService;
 
-    public UserController(RegistrationServiceImpl registrationService, LoginServiceImpl loginService) {
+    public UserController(RedisToolsImpl redisTools, RegistrationServiceImpl registrationService, LoginServiceImpl loginService) {
+        this.redisTools = redisTools;
         this.registrationService = registrationService;
         this.loginService = loginService;
     }
@@ -44,6 +48,11 @@ public class UserController {
     @PostMapping("/register")
     public Result registration(@RequestBody JSONObject jsonParam){
         return registrationService.registration(jsonParam);
+    }
+
+    @PostMapping("/getLoginState")
+    public boolean getLoginState(String token){
+        return redisTools.getByKey(token) != null;
     }
 
 

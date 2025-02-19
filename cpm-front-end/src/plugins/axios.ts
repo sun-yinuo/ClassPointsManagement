@@ -15,7 +15,7 @@ export class Request {
     instance: AxiosInstance;
     // 基础配置，url和超时时间
     baseConfig: AxiosRequestConfig = {
-        baseURL: "http://localhost:9000",
+        baseURL: "http://127.0.0.1:9000",
         timeout: 60000,
         headers: {'Content-Type': 'application/json','token' : getCookie('token'),'Access-Control-Allow-Origin': '*'}
     };
