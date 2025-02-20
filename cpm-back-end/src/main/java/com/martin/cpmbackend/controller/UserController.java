@@ -1,16 +1,18 @@
 package com.martin.cpmbackend.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.martin.cpmbackend.mode.User;
 import com.martin.cpmbackend.service.api.user.impl.LoginServiceImpl;
 import com.martin.cpmbackend.service.api.user.impl.RegistrationServiceImpl;
 import com.martin.cpmbackend.service.db.impl.RedisToolsImpl;
 import com.martin.cpmbackend.service.db.impl.UserServiceImpl;
 import com.martin.cpmbackend.utils.result.Result;
+import com.martin.cpmbackend.utils.result.ResultEnum;
+import com.martin.cpmbackend.utils.result.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 用户相关操作控制
@@ -23,11 +25,13 @@ public class UserController {
     public final RedisToolsImpl redisTools;
     public final RegistrationServiceImpl registrationService;
     public final LoginServiceImpl loginService;
+    public final UserServiceImpl userService;
 
-    public UserController(RedisToolsImpl redisTools, RegistrationServiceImpl registrationService, LoginServiceImpl loginService) {
+    public UserController(RedisToolsImpl redisTools, RegistrationServiceImpl registrationService, LoginServiceImpl loginService, UserServiceImpl userService) {
         this.redisTools = redisTools;
         this.registrationService = registrationService;
         this.loginService = loginService;
+        this.userService = userService;
     }
 
     /**
@@ -56,4 +60,24 @@ public class UserController {
     }
 
 
+    @GetMapping("/getPointByName")
+    public int getPointByName( String name){
+        User user = userService.getUserByName(name);
+        if (user != null) {
+            return user.getPoints();
+        }else {
+            return 0;
+        }
+
+    }
+
+    @GetMapping("/getAdministratorByToken")
+    public int getAdministratorByToken(String token){
+        User user = JSONObject.parseObject((String) redisTools.getByKey(token), User.class);
+        if (user != null) {
+            return user.getAdministrator();
+        }else {
+            return -1;
+        }
+    }
 }

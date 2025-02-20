@@ -46,6 +46,7 @@ public class PointsServiceImpl implements PointsService {
         String subject = jsonParam.getString("subject");
         //获取目标
         String target = jsonParam.getString("target");
+
         //获取值
         int value = jsonParam.getInteger("value");
         //获取原因
@@ -65,6 +66,11 @@ public class PointsServiceImpl implements PointsService {
         if (permission == 2){
             //获取原来用户信息
             User student = userService.getUserByName(target);
+
+            if (student == null){
+                return ResultUtil.result(ResultEnum.SERVER_ERROR.getCode(), "未注册!");
+            }
+
             //加分
             student.setPoints(student.getPoints() + value);
             //更新
@@ -163,6 +169,11 @@ public class PointsServiceImpl implements PointsService {
         if (permission == 2){
             //获取原来用户信息
             User student = userService.getUserByName(target);
+
+            if (student == null){
+                return ResultUtil.result(ResultEnum.SERVER_ERROR.getCode(), "未注册!");
+            }
+
             //减分
             student.setPoints(student.getPoints() - value);
             //更新
@@ -171,7 +182,7 @@ public class PointsServiceImpl implements PointsService {
             if (influence == 1){
                 Event event = new Event();
                 event.setId(0);
-                event.setEventType(2);
+                event.setEventType(3);
                 event.setTime(String.valueOf(System.currentTimeMillis()));
                 event.setOperator("班主任");
                 event.setTarget(target);
@@ -195,7 +206,7 @@ public class PointsServiceImpl implements PointsService {
         if (permission == 1){
             Event event = new Event();
             //event.setId(0);
-            event.setEventType(2);
+            event.setEventType(3);
             event.setTime(String.valueOf(System.currentTimeMillis()));
             event.setOperator(user.getUserName());
             event.setTarget(target);

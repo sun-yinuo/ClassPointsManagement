@@ -1,5 +1,6 @@
 package com.martin.cpmbackend.service.db;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,5 +35,12 @@ public interface RedisTools {
      * @param key k
      */
     void delete (String key);
+
+    /**
+     * 模糊
+     * @param prex key
+     * @return result
+     */
+    List getByPrex(String prex);
 
 }

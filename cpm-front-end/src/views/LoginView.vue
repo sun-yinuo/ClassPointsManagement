@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {FormItem} from "view-ui-plus";
+import {FormItem, Notice} from "view-ui-plus";
 import {onMounted, ref} from "vue";
 
 import {request} from "@/plugins/axios";
@@ -39,7 +39,7 @@ export default {
 
 
   components: {FormItem},
-  data() {
+  data() : { loginForm: { username: string; password: string }; loginRules: any }{
     return {
       loginForm: {
         username: '',
@@ -52,14 +52,14 @@ export default {
     };
   },
   methods: {
-    handleLogin() {
+    handleLogin(this: any){
       request.post('/user/login', {
         "userName": this.loginForm.username,
         "password": this.loginForm.password
       }).then(r => {
         message.value = r.data.msg;
         if (r.data.code === 200) {
-          this.$Notice.success({
+          Notice.success({
             title: '登陆成功',
             desc: message.value,
           });
@@ -68,7 +68,7 @@ export default {
           router.replace('/points');
         }
         if (r.data.code === 403) {
-          this.$Notice.error({
+          Notice.error({
             title: '登陆失败',
             desc: message.value,
           });
@@ -77,7 +77,7 @@ export default {
       });
     },
     goToRegister() {
-      this.$router.push('/register');
+      router.push('/register');
     },
   },
   created() {

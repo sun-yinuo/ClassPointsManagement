@@ -5,6 +5,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -49,5 +52,19 @@ public class RedisToolsImpl implements RedisTools {
     @Override
     public void delete(String key) {
         redisTemplate.delete(key);
+    }
+
+    @Override
+    public List<String> getByPrex(String prex){
+        List<String> getByKey = new ArrayList<>();
+        Set<String> set = redisTemplate.keys(prex);
+        if (set != null){
+            for (String keys : set) {
+                getByKey.add((String) getByKey(keys));
+            }
+
+            return getByKey;
+        }
+        return null;
     }
 }
