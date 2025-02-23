@@ -14,19 +14,19 @@ spring:
           datasource:
             #开发数据源
             mysql-development:
-              url: jdbc:mysql://192.168.0.6:3306/cpm-dev
+              url: jdbc:mysql://127.0.0.1/cpm-dev
               username: root
-              password: MysqlSunyinuo15332
+              password: MysqlSunyinuo15332#
               driver-class-name: com.mysql.cj.jdbc.Driver
   # redis caching
   cache:
       type: redis
   redis:
-      host: 192.168.0.6
+      host: 127.0.0.1
       port: 6379
       database: 0
-      username: default
-      password: redis_HJAZhN
+      #username: default
+      #password: redis_HJAZhN
       timeout: 3000ms
       lettuce:
           pool:
