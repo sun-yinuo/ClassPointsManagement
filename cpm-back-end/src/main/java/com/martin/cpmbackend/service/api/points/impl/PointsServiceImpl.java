@@ -1,7 +1,6 @@
 package com.martin.cpmbackend.service.api.points.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.martin.cpmbackend.mode.Event;
 import com.martin.cpmbackend.mode.PointEvent;
 import com.martin.cpmbackend.mode.User;

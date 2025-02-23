@@ -19,7 +19,7 @@ import java.util.List;
  * @author sunyinuo
  */
 @RestController
-@RequestMapping("/user/")
+@RequestMapping("/api/user/")
 public class UserController {
 
     public final RedisToolsImpl redisTools;

@@ -1,40 +1,67 @@
 <template>
   <Menu mode="horizontal" :theme="theme" active-name="1">
-    <MenuItem name="1">
+    <MenuItem name="1" to="/points">
       <Icon type="ios-ribbon" />
       积分管理
     </MenuItem>
-    <MenuItem name="2">
+    <MenuItem name="2" to="/ranking">
       <Icon type="ios-people" />
-      用户管理
+      积分排行榜
     </MenuItem>
-    <Submenu name="3">
-      <template #title>
-        <Icon type="ios-stats" />
-        统计分析
-      </template>
-      <MenuGroup title="使用">
-        <MenuItem name="3-1">新增和启动</MenuItem>
-        <MenuItem name="3-2">活跃分析</MenuItem>
-        <MenuItem name="3-3">时段分析</MenuItem>
-      </MenuGroup>
-      <MenuGroup title="留存">
-        <MenuItem name="3-4">用户留存</MenuItem>
-        <MenuItem name="3-5">流失用户</MenuItem>
-      </MenuGroup>
-    </Submenu>
-    <MenuItem name="4">
-      <Icon type="ios-construct" />
-      综合设置
+    <MenuItem name="3" to="/event" v-if="showItem">
+      <Icon type="md-analytics" />
+      事件管理
+    </MenuItem>
+    <MenuItem name="4" to="/audit" v-if="showItem">
+      <Icon type="md-information-circle" />
+      审核面板
     </MenuItem>
   </Menu>
 </template>
+
 <script>
+import {Notice} from "view-ui-plus";
+import { onMounted, ref } from "vue";
+import { request } from "@/plugins/axios";
+import { getCookie } from "typescript-cookie";
+import router from "@/router";
+
 export default {
-  data () {
+  setup() {
+    const showItem = ref(false);
+
+    // 获取用户权限
+    const checkShowButton = () => {
+      request.get('/user/getAdministratorByToken/?token=' + getCookie('token'))
+          .then(r => {
+            let result = r.data;
+
+            if (result === 2) {
+              showItem.value = true;
+            } else if (result === 0 || result === 1) {
+              showItem.value = false;
+            } else if (result === -1) {
+              Notice.error({
+                title: '未登录',
+              });
+              router.replace('/login');
+            }
+          })
+          .catch(() => {
+            Notice.error({
+              title: '请求失败，请重试',
+            });
+          });
+    };
+
+    // 组件挂载后执行
+    onMounted(() => {
+      checkShowButton();
+    });
+
     return {
-      theme: 'light'
-    }
+      showItem
+    };
   }
-}
+};
 </script>

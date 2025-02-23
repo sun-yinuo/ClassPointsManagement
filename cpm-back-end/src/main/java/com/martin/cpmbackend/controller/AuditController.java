@@ -23,7 +23,7 @@ import java.util.List;
  * @author sunyinuo
  */
 @RestController
-@RequestMapping("/point-events/")
+@RequestMapping("/api/point-events/")
 public class AuditController {
 
 

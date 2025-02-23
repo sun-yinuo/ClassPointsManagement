@@ -4,6 +4,8 @@ import LoginView from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import PointView from "@/views/PointView.vue";
 import AuditView from "@/views/AuditView.vue";
+import RankingListView from "@/views/RankingListView.vue";
+import EventsListView from "@/views/EventsListView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +31,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/audit',
     name: 'audit',
     component: AuditView
+  },
+
+  {
+    path: '/ranking',
+    name: 'RankingList',
+    component: RankingListView
+  },
+  {
+    path: '/event',
+    name: 'EventsList',
+    component: EventsListView
   }
 
 

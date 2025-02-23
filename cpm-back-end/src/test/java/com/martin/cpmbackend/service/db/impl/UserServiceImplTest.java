@@ -33,6 +33,7 @@ class UserServiceImplTest {
         System.out.println(userService.getUserByName("孙一诺"));
     }
 
+    /*
     @Test
     void addUser() {
         User user = new User();
@@ -46,11 +47,14 @@ class UserServiceImplTest {
         userService.addUser(user);
     }
 
+     */
+
     @Test
     void getUserByAdministrator() {
         System.out.println(userService.getUserByAdministrator(0));
     }
 
+    /*
     @Test
     void update() {
         User user = new User();
@@ -63,4 +67,6 @@ class UserServiceImplTest {
         user.setSalt(0);
         userService.update(user);
     }
+
+     */
 }

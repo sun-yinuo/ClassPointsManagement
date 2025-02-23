@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @author sunyinuo
  */
 @RestController
-@RequestMapping("/points/")
+@RequestMapping("/api/points/")
 public class PointsController {
 
 
