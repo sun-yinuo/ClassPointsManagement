@@ -15,7 +15,7 @@ export class Request {
     instance: AxiosInstance;
     // 基础配置，url和超时时间
     baseConfig: AxiosRequestConfig = {
-        baseURL: "http://192.168.0.6:9000/api",
+        baseURL: "http://lasdevelopmentgroup.ddns.net:9000/api",
         timeout: 60000,
         headers: {'Content-Type': 'application/json','token' : getCookie('token')}
     };
